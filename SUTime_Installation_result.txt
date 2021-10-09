@@ -1,0 +1,183 @@
+1. Install Java jdk:(https://www.oracle.com/java/technologies/downloads/#jdk17-windows)
+	a. Check Java installation
+	b. Add as "JAVA_HOME: C:\Program Files\Java\jdk-17" path as a new user environment variable
+	c. Add to system environment variable "path" C:\Program Files\Java\jdk-17, and put it on top of any previous installation
+	
+2. Install Apache MVN:(https://maven.apache.org/download.cgi) (Binary ZIP Archive Files)
+	a. After extracting move the downloaded file "apache-maven-3.8.3" to Program Files
+	b. Add a uew user environment variable "MAVEN_HOME: C:\Program Files\apache-maven-3.8.3"
+	c. Add a uew user environment variable "M2_HOME: C:\Program Files\apache-maven-3.8.3"
+	d. Add a new path to "path" environment variable "C:\Program Files\apache-maven-3.8.3\bin"
+	
+3. Create a new conda environment
+{Help for the next steps: https://pypi.org/project/sutime/}
+4. pip install sutime
+5. mvn dependency:copy-dependencies -DoutputDirectory=./jars
+6. Copy all jar files in side the "jars" folder thate we just now created in "C:\Users\arind" to the "jars" folder inside the
+ "sutime" folder of the created virtual environment "C:\Users\arind\anaconda3\envs\nlp_env_ver_1\lib\site-packages\sutime" 
+
+Example results:
+
+1. text = '''Their were 2021 people alive in 2021'''
+
+	{
+        "end": 36,
+        "start": 32,
+        "text": "2021",
+        "timex-value": "2021",
+        "type": "DATE",
+        "value": "2021"
+    }
+
+
+2. text = '''Royal Dutch Shell RDSa.L said it was closing its refinery in Convent, Louisiana, the largest such U.S. facility. 
+		     The shutdown will occur in November after Shell failed to find a buyer. Shell expects to sell all but six refineries
+		     and chemical plants globally and is considering closing facilities it cannot sell.'''
+
+	{
+        "end": 148,
+        "start": 140,
+        "text": "November",
+        "timex-value": "2021-11",
+        "type": "DATE",
+        "value": "2021-11"
+    }
+	
+3. text = '''Exxon Mobil Corp XOM.N is urging the Australian government to start releasing aid to the country's oil refineries 
+		     by January after a decision by BP early in November to shut the nation's biggest refinery'''
+			 
+	{
+        "end": 124,
+        "start": 117,
+        "text": "January",
+        "timex-value": "2022-01",
+        "type": "DATE",
+        "value": "2022-01"
+    },
+    {
+        "end": 165,
+        "start": 148,
+        "text": "early in November",
+        "timex-value": "2021-11",
+        "type": "DATE",
+        "value": "2021-11"
+    }
+	
+4. text = '''A key oil refinery for U.S. East Coast consumers is halting operations after escalating environmental scrutiny made
+			 it impossible for backers to obtain desperately needed financing. The owners of the Limetree Bay refinery in the U.S.
+			 Virgin Islands announced plans Monday to shut the 200,000-barrel-a-day facility and dismiss more than 250 workers just
+			 weeks after a federal crackdown over a series of pollution incidents.
+			 The demise of Limetree Bay is the most dramatic fallout from the Biden administration’s crusade to wean the world’s biggest
+			 economy off fossil fuels since the January cancellation of the Keystone XL pipeline project. It’s also emblematic of the
+			 challenges facing an industry struggling with shrinking profitability, excess production capacity and rising competition from
+			 mega-refineries in Asia. There’s no reason we won’t see further closures in the U.S.,” said Robert Campbell, head of oil
+			 products research at Energy Aspects Ltd. Refiners will find it harder and harder to raise money for equipment upgrades
+			 and pollution-control gear, he noted. Refinery executives told employees on Monday that 271 of them will lose their jobs
+			 effective Sept. 19, according to a company statement that cited “severe financial constraints.”
+			 Limetree Bay has attracted the attention of environmental regulators since its backers that include ArcLight Capital 
+			 Partners, Freepoint Commodities and EIG Global Energy Partners began efforts to restart the idled refinery in September.
+			 Last month, following a slew of emissions incidents that included contamination of drinking water, the Environmental 
+			 Protection Agency ordered it to halt operations, reversing a Trump administration approval.
+			 Known formerly as Hovensa, the St. Croix plant was previously owned by Hess Corp. and Venezuela’s state-owned 
+			 Petroleos de Venezuela SA before it was shuttered in 2012. Once a major supplier of gasoline and diesel to the 
+			 East Coast markets, the facility was mothballed during a previous downturn in demand and increased international competition.
+			 Roughly 2 million barrels of daily refining capacity may be shut next year to avoid further margin erosion, 
+			 BloombergNEF analyst Sisi Tang said in a report. The transition away from fossil fuels also dims the long-term
+			 outlook for refiners, prompting companies such as Valero Energy Corp. to expand into biofuels.'''
+			 
+	{
+        "end": 272,
+        "start": 266,
+        "text": "Monday",
+        "timex-value": "2021-10-04",
+        "type": "DATE",
+        "value": "2021-10-04"
+    },
+    {
+        "end": 359,
+        "start": 354,
+        "text": "weeks",
+        "timex-value": "PXW",
+        "type": "DURATION",
+        "value": "PXW"
+    },
+    {
+        "end": 591,
+        "start": 584,
+        "text": "January",
+        "timex-value": "2022-01",
+        "type": "DATE",
+        "value": "2022-01"
+    },
+    {
+        "end": 1121,
+        "start": 1115,
+        "text": "Monday",
+        "timex-value": "2021-10-04",
+        "type": "DATE",
+        "value": "2021-10-04"
+    },
+    {
+        "end": 1178,
+        "start": 1170,
+        "text": "Sept. 19",
+        "timex-value": "2021-09-19",
+        "type": "DATE",
+        "value": "2021-09-19"
+    },
+    {
+        "end": 1493,
+        "start": 1484,
+        "text": "September",
+        "timex-value": "2021-09",
+        "type": "DATE",
+        "value": "2021-09"
+    },
+    {
+        "end": 1506,
+        "start": 1496,
+        "text": "Last month",
+        "timex-value": "2021-09",
+        "type": "DATE",
+        "value": "2021-09"
+    },
+    {
+        "end": 1767,
+        "start": 1757,
+        "text": "previously",
+        "timex-value": "PAST_REF",
+        "type": "DATE",
+        "value": "PAST_REF"
+    },
+    {
+        "end": 1873,
+        "start": 1869,
+        "text": "2012",
+        "timex-value": "2012",
+        "type": "DATE",
+        "value": "2012"
+    },
+    {
+        "end": 1879,
+        "start": 1875,
+        "text": "Once",
+        "timex-value": "PAST_REF",
+        "type": "DATE",
+        "value": "PAST_REF"
+    },
+    {
+        "end": 2088,
+        "start": 2083,
+        "text": "daily",
+        "timex-value": "P1D",
+        "type": "SET",
+        "value": "P1D"
+    },
+    {
+        "end": 2128,
+        "start": 2119,
+        "text": "next year",
+        "timex-value": "2022",
+        "type": "DATE",
+        "value": "2022"
+    }
