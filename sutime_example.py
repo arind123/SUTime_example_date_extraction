@@ -29,5 +29,4 @@ Roughly 2 million barrels of daily refining capacity may be shut next year to av
 sutime = SUTime(mark_time_ranges=True, include_range=True)
 print(json.dumps(sutime.parse(test_case), sort_keys=True, indent=4))
 
-
-SUTime()
+#Take the entire sentence where the date occcurs.
