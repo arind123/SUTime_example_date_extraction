@@ -181,3 +181,68 @@ Example results:
         "type": "DATE",
         "value": "2022"
     }
+	
+For the sentence with the date for the summarization Result:
+
+Date String: Monday 
+Sentence:  Virgin Islands announced plans Monday to shut the 200,000-barrel-a-day facility and dismiss more than 250 workers just weeks after a federal crackdown over a series of pollution incidents
+
+
+Date String: weeks 
+Sentence:  Virgin Islands announced plans Monday to shut the 200,000-barrel-a-day facility and dismiss more than 250 workers just weeks after a federal crackdown over a series of pollution incidents
+
+
+Date String: January 
+Sentence: 
+
+The demise of Limetree Bay is the most dramatic fallout from the Biden administration’s crusade to wean the world’s biggest economy off fossil fuels since the January cancellation of the Keystone XL pipeline project
+
+
+Date String: Monday 
+Sentence: 
+
+Refinery executives told employees on Monday that 271 of them will lose their jobs effective Sept
+
+
+Date String: Sept. 19 
+Sentence: 
+
+Refinery executives told employees on Monday that 271 of them will lose their jobs effective Sept. 19, according to a company statement that cited “severe financial constraints
+
+
+Date String: September 
+Sentence: ”
+
+Limetree Bay has attracted the attention of environmental regulators since its backers that include ArcLight Capital Partners, Freepoint Commodities and EIG Global Energy Partners began efforts to restart the idled refinery in September
+
+
+Date String: Last month 
+Sentence: 
+
+Last month, following a slew of emissions incidents that included contamination of drinking water, the Environmental Protection Agency ordered it to halt operations, reversing a Trump administration approval
+
+
+Date String: previously 
+Sentence:  Croix plant was previously owned by Hess Corp
+
+
+Date String: 2012 
+Sentence:  and Venezuela’s state-owned Petroleos de Venezuela SA before it was shuttered in 2012
+
+
+Date String: Once 
+Sentence:  Once a major supplier of gasoline and diesel to the East Coast markets, the facility was mothballed during a previous downturn in demand and increased international competition
+
+
+Date String: daily 
+Sentence: 
+
+Roughly 2 million barrels of daily refining capacity may be shut next year to avoid further margin erosion, BloombergNEF analyst Sisi Tang said in a report
+
+
+Date String: next year 
+Sentence: 
+
+Roughly 2 million barrels of daily refining capacity may be shut next year to avoid further margin erosion, BloombergNEF analyst Sisi Tang said in a report
+
+

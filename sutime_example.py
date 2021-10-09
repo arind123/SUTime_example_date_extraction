@@ -7,6 +7,7 @@ This is a temporary script file.
 
 import json
 from sutime import SUTime
+import numpy as np
 
 
 test_case = '''A key oil refinery for U.S. East Coast consumers is halting operations after escalating environmental scrutiny made it impossible for backers to obtain desperately needed financing.
@@ -26,7 +27,42 @@ Last month, following a slew of emissions incidents that included contamination 
 Known formerly as Hovensa, the St. Croix plant was previously owned by Hess Corp. and Venezuela’s state-owned Petroleos de Venezuela SA before it was shuttered in 2012. Once a major supplier of gasoline and diesel to the East Coast markets, the facility was mothballed during a previous downturn in demand and increased international competition.
 
 Roughly 2 million barrels of daily refining capacity may be shut next year to avoid further margin erosion, BloombergNEF analyst Sisi Tang said in a report. The transition away from fossil fuels also dims the long-term outlook for refiners, prompting companies such as Valero Energy Corp. to expand into biofuels.'''
+
+#test_case = 'I have a dog. I got in last tuesday. It was 09/10/2021. My birthday 14 th march came early. 20 th sep i got there.I had march in  my calender.'
+
 sutime = SUTime(mark_time_ranges=True, include_range=True)
-print(json.dumps(sutime.parse(test_case), sort_keys=True, indent=4))
+
+result = json.dumps(sutime.parse(test_case), sort_keys=True, indent=4)
 
 #Take the entire sentence where the date occcurs.
+
+jdata = json.loads(result)
+
+for d in jdata:
+    for key, value in d.items():
+        if key == 'start':
+            start = value
+        if key == 'end':
+            end = value
+        if key == 'text':
+            date_string = value
+            
+    full_stop='.'
+    list_index_full_stop = []
+    for i in range(len(test_case)):
+        if (test_case[i] == full_stop):
+            list_index_full_stop.append(i)
+    #print(start,end)            
+    arr_index_full_stop = np.array(list_index_full_stop)
+    #print(arr_index_full_stop)
+    sent_start = arr_index_full_stop[arr_index_full_stop <= start].max()
+    #print(sent_start)
+    if max(list_index_full_stop)==end:
+        sent_end = end
+    else:
+        sent_end = arr_index_full_stop[arr_index_full_stop >= end].min()
+    #print(sent_end)
+    sentence = test_case[sent_start+1:sent_end]
+    
+    print('Date String: {} \nSentence: {}\n\n'.format(date_string,sentence))
+        
