@@ -15,7 +15,7 @@
 5. mvn dependency:copy-dependencies -DoutputDirectory=./jars
 6. Copy all jar files in side the "jars" folder thate we just now created in "C:\Users\arind" to the "jars" folder inside the
  "sutime" folder of the created virtual environment "C:\Users\arind\anaconda3\envs\nlp_env_ver_1\lib\site-packages\sutime" 
-7. Install nlyk, spaCy and their corresponding requirements
+7. Install nltk, spaCy and their corresponding requirements
 
 Example results--->
 
@@ -183,8 +183,9 @@ Example results--->
         "value": "2022"
     }
 	
-##  For the sentence with the date for the summarization Result and extracted subject verb object phrase
-###, which can be optimized as per requiremnt:
+**  For the sentence with the date for the summarization Result and extracted subject verb object phrase
+**, which can be optimized as per requiremnt (For this part I took the codes and the idea from Rock de Vocht(peter3125)(https://github.com/peter3125/enhanced-subject-verb-
+** object-extraction and some adjustments in the "dependency markers for subjects and objects" refered from the artice https://suttipong-kull.medium.com/how-to-extract-subject-** verb-and-object-by-nlp-4149323a7d7d) :
 
 Final RESULT--->
 
