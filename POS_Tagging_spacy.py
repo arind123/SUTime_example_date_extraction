@@ -321,13 +321,13 @@ tok = nlp("Refinery ABC is planning for a shutdown")
 svos = findSVOs(tok)
 #printDeps(tok)
 print(svos)
-[('Refinery ABC', 'planning')]
 
-tok = nlp("Virgin Islands announced plans Monday to shut the 200,000-barrel-a-day facility and dismiss more than 250 workers just weeks after a federal crackdown over a series of pollution incidents")
+
+tok = nlp("Virgin Islands announced plans Monday to shut the 200 000 barrel a day facility and dismiss more than 250 workers just weeks after a federal crackdown over a series of pollution incidents")
 svos = findSVOs(tok)
 #printDeps(tok)
 print(svos)
-[('Virgin Islands', 'shut', 'plans'), ('Virgin Islands', 'shut', 'the barrel facility')]
+
 
 tok = nlp('Earlier was better.')
 svos = findSVOs(tok)

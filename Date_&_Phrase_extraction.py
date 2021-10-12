@@ -14,6 +14,7 @@ import pandas as pd
 import json
 from sutime import SUTime
 import numpy as np
+from nltk import tokenize
 
 # use spacy small model
 nlp = en_core_web_sm.load()
@@ -330,26 +331,13 @@ def findSVOs(tokens):
 
 
 ## Date extract and use above mentioned functions for phrase extraction
-test_case = ''' .Refinery ABC is planning for a shutdown from 1 Jan 2020 to 1 Jun 2020 for 5 months..The owners of the Limetree Bay refinery in the U.S. Virgin Islands announced plans Monday to shut the 200,000-barrel-a-day facility and dismiss more than 250 workers just weeks after a federal crackdown over a series of pollution incidents.
-
-The demise of Limetree Bay is the most dramatic fallout from the Biden administration’s crusade to wean the world’s biggest economy off fossil fuels since the January cancellation of the Keystone XL pipeline project. It’s also emblematic of the challenges facing an industry struggling with shrinking profitability, excess production capacity and rising competition from mega-refineries in Asia.
-
-“There’s no reason we won’t see further closures in the U.S.,” said Robert Campbell, head of oil products research at Energy Aspects Ltd. Refiners will find it harder and harder to raise money for equipment upgrades and pollution-control gear, he noted.
-
-Refinery executives told employees on Monday that 271 of them will lose their jobs effective Sept. 19, according to a company statement that cited “severe financial constraints.”
-
-Limetree Bay has attracted the attention of environmental regulators since its backers that include ArcLight Capital Partners, Freepoint Commodities and EIG Global Energy Partners began efforts to restart the idled refinery in September.
-
-Last month, following a slew of emissions incidents that included contamination of drinking water, the Environmental Protection Agency ordered it to halt operations, reversing a Trump administration approval.
-
-Known formerly as Hovensa, the St. Croix plant was previously owned by Hess Corp. and Venezuela’s state-owned Petroleos de Venezuela SA before it was shuttered in 2012. Once a major supplier of gasoline and diesel to the East Coast markets, the facility was mothballed during a previous downturn in demand and increased international competition.
-
-Roughly 2 million barrels of daily refining capacity may be shut next year to avoid further margin erosion, BloombergNEF analyst Sisi Tang said in a report. The transition away from fossil fuels also dims the long-term outlook for refiners, prompting companies such as Valero Energy Corp. to expand into biofuels.'''
+test_case = '''Refinery ABC is planning for a shutdown from 1 Jan 2020 to 1 Jun 2020 for 5 months. The owners of the Limetree Bay refinery in the U.S. Virgin Islands announced plans Monday to shut the 200,000-barrel-a-day facility and dismiss more than 250 workers just weeks after a federal crackdown over a series of pollution incidents. The demise of Limetree Bay is the most dramatic fallout from the Biden administration’s crusade to wean the world’s biggest economy off fossil fuels since the January cancellation of the Keystone XL pipeline project. It’s also emblematic of the challenges facing an industry struggling with shrinking profitability, excess production capacity and rising competition from mega-refineries in Asia. “There’s no reason we won’t see further closures in the U.S.,” said Robert Campbell, head of oil products research at Energy Aspects Ltd. Refiners will find it harder and harder to raise money for equipment upgrades and pollution-control gear, he noted. Refinery executives told employees on Monday that 271 of them will lose their jobs effective Sept 19, according to a company statement that cited “severe financial constraints.” Limetree Bay has attracted the attention of environmental regulators since its backers that include ArcLight Capital Partners, Freepoint Commodities and EIG Global Energy Partners began efforts to restart the idled refinery in September. Last month, following a slew of emissions incidents that included contamination of drinking water, the Environmental Protection Agency ordered it to halt operations, reversing a Trump administration approval. Known formerly as Hovensa, the St. Croix plant was previously owned by Hess Corp. and Venezuela’s state-owned Petroleos de Venezuela SA before it was shuttered in 2012. Once a major supplier of gasoline and diesel to the East Coast markets, the facility was mothballed during a previous downturn in demand and increased international competition.Roughly 2 million barrels of daily refining capacity may be shut next year to avoid further margin erosion, BloombergNEF analyst Sisi Tang said in a report. The transition away from fossil fuels also dims the long-term outlook for refiners, prompting companies such as Valero Energy Corp. to expand into biofuels.'''
 
 #test_case = 'I have a dog. I got in last tuesday. It was 09/10/2021. My birthday 14 th march came early. 20 th sep i got there.I had march in  my calender.'
-
+#test_case = 'I was born in march 1992'
 sutime = SUTime(mark_time_ranges=True, include_range=True)
 
+### Result using a loop
 result = json.dumps(sutime.parse(test_case), sort_keys=True, indent=4)
 
 #Take the entire sentence where the date occcurs.
@@ -357,7 +345,7 @@ result = json.dumps(sutime.parse(test_case), sort_keys=True, indent=4)
 jdata = json.loads(result)
 
 for d in jdata:
-    #print(d)
+    print(d)
     for key, value in d.items():
         if key == 'start':
             start = value
@@ -388,4 +376,105 @@ for d in jdata:
     #print(svos)
     
     print('Date String: {} \nSentence: {}\nSubject_Verb_Object: {}\n\n'.format(date_string,sentence,svos))
+
+#create DataFrame
+list_sentences = list(tokenize.sent_tokenize(test_case))
+
+'''
+sentence_df = pd.DataFrame(list_sentences, columns =['Sentences'])
+
+def extract_date_SVOs(sentence):
         
+    result = json.dumps(sutime.parse(sentence), sort_keys=True, indent=4)
+
+#Take the entire sentence check for dates
+    jdata = json.loads(result)
+    text = []
+    svos = []
+    timex_value = []
+    type = []
+    values = []
+    if len(jdata)==0:#no dates in the sentence
+        
+        text="NA"
+        svos="NA"
+        #timex_value="NA"
+        type="NA"
+        values="NA"
+    else:
+        for dt in jdata:
+            
+            for key, value in dt.items():
+                if key == 'text':
+                    text.append(value)
+                if key == 'timex-value':
+                    timex_value.append(value)
+                if key == 'type':
+                    type.append(value)
+                if key == 'value':
+                    values.append(value)
+        tokens = nlp(sentence)
+        svos = findSVOs(tokens)
+        print('\nDate String: {}   Timex_value: {}   Type: {}  Value: {}  \nSentence: {}\nSubject_Verb_Object: {}\n\n'.format(text,timex_value,type,value,sentence,svos))
+    return text,timex_value,type,values,svos
+
+
+sentence_df["text"], sentence_df["timex_value"],sentence_df["type"],sentence_df["value"],sentence_df["svo"] =zip(*sentence_df['Sentences'].map(extract_date_SVOs))           
+'''
+sent_dict_list = [] 
+#### Create extracted dataframe dictionary    
+for sent in list_sentences:
+    #print(sent)
+    result = json.dumps(sutime.parse(sent), sort_keys=True, indent=4)
+    jdata = json.loads(result)
+    #print(jdata)
+    if len(jdata)==0:
+        tokens = nlp(sent)
+        svos = findSVOs(tokens)
+        result_dict = {'Sentence': sent,
+                       'date_text':'NA',
+                       'timex_value':'NA',
+                       'date_type':'NA',
+                       'date_value':'NA',
+                       'svos':svos}
+        print('\nDate String: {}   Timex_value: {}   Type: {}  Value: {}  \nSentence: {}\nSubject_Verb_Object: {}\n\n'.format('NA','NA','NA','NA',sent,svos))
+        sent_dict_list.append(result_dict)
+    else:
+        for dt in jdata:
+            val = str(dt.get('value'))
+            if not val.startswith('P'):#Check for valid Date e.g PWD,P1D,P5M etc
+                key_list = dt.keys()
+                
+                if 'text' in key_list:
+                    date_text = dt.get("text")
+                else:
+                    date_text = 'NA'
+                if 'timex-value' in key_list:
+                    timex_value = dt.get("timex-value")
+                else:
+                    timex_value = 'NA'
+                if 'type' in key_list:
+                    date_type = dt.get('type')
+                else:
+                    date_type = 'NA'
+                if 'value' in key_list:
+                    date_value = dt.get('value')
+                else:
+                    date_value = 'NA'
+                        
+                tokens = nlp(sent)
+                svos = findSVOs(tokens)
+                result_dict = {'Sentence': sent,
+                           'date_text':date_text,
+                           'timex_value':timex_value,
+                           'date_type':date_type,
+                           'date_value':date_value,
+                           'svos':svos}
+                print('\nDate String: {}   Timex_value: {}   Type: {}  Value: {}  \nSentence: {}\nSubject_Verb_Object: {}\n\n'.format(date_text,timex_value,date_type,date_value,sent,svos))
+                sent_dict_list.append(result_dict)
+                        
+        
+sentence_df = pd.DataFrame(sent_dict_list)
+      
+        
+    
