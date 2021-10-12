@@ -6,5 +6,5 @@ object-extraction and some adjustments in the "dependency markers for subjects a
 
 DATED: 12/10/2021
 * We are now first taking each sentence of a paragraph and then searching dates and SVOs, inplace of our previous approach of first findeing dates and then getting corresponding sentences(Makes life a lot easier with respect to the coding part).
-* We have excluded those dates for which the taged "value" starts with "P"(e.g. P1D,P5M etc) as those are not really making much sense for our context.
+* We have excluded those dates for which the tag "value" starts with "P"(e.g. P1D,P5M etc) as those are not really making much sense for our context.
 * Need reefinement of the SVO technique for better result.
