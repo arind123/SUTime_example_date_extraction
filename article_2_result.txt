@@ -1,0 +1,22 @@
+##Article:
+Since the start of the pandemic, statistics related to Covid-19 hospitalizations in the world only got worse month by month, Israel said.
+Until the second quarter, oil demand deteriorated along with the intensification of the pandemic.
+However, since about mid-year oil demand took the other direction, and improved month by month even as the pandemic continued to intensify, he added.
+So in September-October we are already back to 95% of pre-Covid numbers. The consensus for the oil demand loss in 2020 is likely to be about 8.5 million bpd worldwide
+
+
+Date String: the second quarter   Timex_value: 2022-Q2   Type: DATE  Value: 2022  
+Sentence: Until the second quarter, oil demand deteriorated along with the intensification of the pandemic.
+Subject_Verb_Object: [('oil demand', 'deteriorated', 'along with the intensification of the pandemic'), ('oil demand', 'deteriorated', 'with intensification')]
+
+
+
+Date String: September-October   Timex_value: NA   Type: DURATION  Value: {'begin': 'XXXX-09', 'end': 'XXXX-10'}  
+Sentence: So in September-October we are already back to 95% of pre-Covid numbers.
+Subject_Verb_Object: [('we', 'are', '95 % of pre - Covid numbers')]
+
+
+
+Date String: 2020   Timex_value: 2020   Type: DATE  Value: 2020  
+Sentence: The consensus for the oil demand loss in 2020 is likely to be about 8.5 million bpd worldwide.
+Subject_Verb_Object: []
